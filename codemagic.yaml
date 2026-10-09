@@ -1,5 +1,4 @@
-workflows:
-  flutter-apk-build:
+flutter-apk-build:
     name: Build Flutter Android APK
     instance_type: mac_mini_m1
     max_build_duration: 30
@@ -8,12 +7,10 @@ workflows:
     scripts:
       - name: Set up Flutter and Get Packages
         script: |
-          cd turbo-vpn-app
           flutter packages get
       - name: Build Android APK
         script: |
-          cd turbo-vpn-app
           flutter build apk --release
     artifacts:
-      - "turbo-vpn-app/build/app/outputs/flutter-apk/*.apk"
+      - "build/app/outputs/flutter-apk/*.apk"
       
