@@ -6,12 +6,23 @@ workflows:
     environment:
       flutter: stable
     scripts:
-      - name: Set up Flutter
+      - name: Set up Flutter and Get Packages
         script: |
+          # البحث عن مجلد المشروع وإليه الانتقال
+          if [ -f "pubspec.yaml" ]; then
+            echo "Project root found in main directory"
+          else
+            cd $(dirname $(find . -maxdepth 2 -name "pubspec.yaml" | head -n 1))
+          fi
           flutter packages get
       - name: Build Android APK
         script: |
+          if [ -f "pubspec.yaml" ]; then
+            echo "Project root found"
+          else
+            cd $(dirname $(find . -maxdepth 2 -name "pubspec.yaml" | head -n 1))
+          fi
           flutter build apk --release
     artifacts:
-      - build/app/outputs/flutter-apk/*.apk
+      - "**/build/app/outputs/flutter-apk/*.apk"
       
