@@ -8,14 +8,12 @@ workflows:
     scripts:
       - name: Set up Flutter and Get Packages
         script: |
-          TARGET_DIR=$(find . -name "pubspec.yaml" -exec dirname {} \;)
-          cd "$TARGET_DIR"
+          cd turbo-vpn-app
           flutter packages get
       - name: Build Android APK
         script: |
-          TARGET_DIR=$(find . -name "pubspec.yaml" -exec dirname {} \;)
-          cd "$TARGET_DIR"
+          cd turbo-vpn-app
           flutter build apk --release
     artifacts:
-      - "**/build/app/outputs/flutter-apk/*.apk"
+      - "turbo-vpn-app/build/app/outputs/flutter-apk/*.apk"
       
